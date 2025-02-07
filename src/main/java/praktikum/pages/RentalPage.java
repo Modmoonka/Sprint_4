@@ -20,7 +20,7 @@ public class RentalPage {
     private final By rentalPeriod = By.xpath(".//div[text() = '* Срок аренды']");
     //Поле для выбора цвета самоката
     private final By colorField = By.xpath(".//div[text() = 'Цвет самоката']");
-    //
+    //Поле даты
     private final By dropDatePiker = By.xpath(".//div[text() = 'Про аренду']");
     //Поле для комментария
     private final By commentField = By.xpath(".//input[@placeholder='Комментарий для курьера']");
@@ -36,12 +36,14 @@ public class RentalPage {
     public RentalPage(WebDriver driver) {
         this.driver = driver;
     }
+
     //Метод выбора даты
     public RentalPage enterDate (String rentalDate) {
           driver.findElement(orderDate).sendKeys(rentalDate);
           driver.findElement(dropDatePiker).click();
           return this;
     }
+
     //Метод срока аренды
     public RentalPage selectRentalDate (String rentPeriod) {
         driver.findElement(rentalPeriod).click();
@@ -78,6 +80,7 @@ public class RentalPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(orderDone));
     }
 
+    //Метод клика по кнопке соглашения заказа
     public void clickConfirmtionOrderButton(){
         driver.findElement(confirmationOrderButton).click();
     }

@@ -25,9 +25,9 @@ public class FaqTest {
 
     @BeforeClass
     public static void closeCookies() {
-        MainPage mp = new MainPage(DriverFactory.getDriver());
-        mp.openMainPage();
-        mp.clickCookie();
+        MainPage mainPage = new MainPage(DriverFactory.getDriver());
+        mainPage.openMainPage();
+        mainPage.clickCookie();
     }
 
     @Parameterized.Parameters
@@ -48,12 +48,12 @@ public class FaqTest {
     // Проверка вопросов и ответов
     @Test
     public void clickFaqItem() {
-        MainPage mp = new MainPage(DriverFactory.getDriver());
-        mp.scrollFaq();
-        mp.clickToAnswer(itemId);
-        mp.waitAcardion(itemId);
-        mp.equalsAnswer(itemId, expectedAnswers);
-        mp.equalsQuestion(itemId, expectedQuestion);
+        MainPage mainPage = new MainPage(DriverFactory.getDriver());
+        mainPage.scrollFaq();
+        mainPage.clickToAnswer(itemId);
+        mainPage.waitAcardion(itemId);
+        mainPage.equalsAnswer(itemId, expectedAnswers);
+        mainPage.equalsQuestion(itemId, expectedQuestion);
     }
 }
 

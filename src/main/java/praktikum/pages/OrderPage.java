@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  */
 
 public class OrderPage {
-    private WebDriver driver;
+    private final WebDriver driver;
 
     //Поле для ввода имени
     private final By nameField = By.xpath(".//input[@placeholder='* Имя']");
@@ -30,30 +30,35 @@ public class OrderPage {
 
     //Метод ввода имени
     public OrderPage enterName(String name) {
-        driver.findElement(nameField).sendKeys("Иван");
+        driver.findElement(nameField).sendKeys(name);
         return this;
     }
+
     //Метод ввода фамилии
     public OrderPage enterSurname(String surname) {
-        driver.findElement(surnameField).sendKeys("Иванов");
+        driver.findElement(surnameField).sendKeys(surname);
         return this;
     }
+
     //Метод ввода адреса
     public OrderPage enterAddress(String address) {
-        driver.findElement(addressField).sendKeys("Москва, Московская 8");
+        driver.findElement(addressField).sendKeys(address);
         return this;
     }
+
     //Метод ввода станции метро
     public OrderPage enterMetro(String metro) {
         driver.findElement(metroField).click();
         driver.findElement(By.xpath(".//ul[@class='select-search__options']/li//div[text()='" + metro + "']/parent::button")).click();
         return this;
     }
-   ////Метод ввода телефона
+
+   //Метод ввода телефона
     public OrderPage enterPhoneNumber(String phone) {
-        driver.findElement(phoneNumberField).sendKeys("+7922222222");
+        driver.findElement(phoneNumberField).sendKeys(phone);
         return this;
     }
+
     //Метод клика по кнопке далее
     public void clickNextButton() {
         driver.findElement(nextPageButton).click();

@@ -1,18 +1,24 @@
 package praktikum;
 
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import praktikum.pages.MainPage;
 
 public class StatusTest {
-    public DriverFactory factory = new DriverFactory();
+    @ClassRule
+    public static DriverFactory factory= new DriverFactory();
 
+    @BeforeClass
+    public static void closeCookies() {
+        MainPage mainPage = new MainPage(DriverFactory.getDriver());
+        mainPage.openMainPage();
+        mainPage.clickCookie();
+    }
 
     @Test
     public void openMainPage() {
-        WebDriver driver = factory.getDriver();
-
-        var mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(DriverFactory.getDriver());
         mainPage.openMainPage();
         mainPage.clickOnStatus();
 
@@ -22,6 +28,4 @@ public class StatusTest {
         var statusPage = mainPage.clickOnGo();
         statusPage.checkNotFoundMessage();
     }
-
-
 }

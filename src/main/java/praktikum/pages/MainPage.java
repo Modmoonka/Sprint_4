@@ -1,6 +1,5 @@
 package praktikum.pages;
 
-import com.sun.tools.javac.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import  praktikum.EnvConfig;
-
 import java.time.Duration;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static praktikum.EnvConfig.EXPLICIT_WAIT;
@@ -46,31 +43,28 @@ public class MainPage {
         this.driver.get(EnvConfig.BASE_URL);
     }
 
-
-    public MainPage clickCookie() {
+    //Клик на согласие использования куков
+    public void clickCookie() {
         this.driver.findElement(this.cookieButton).click();
-        return this;
     }
 
     //Метод скрола до блока вопросы о важном
-    public MainPage scrollFaq() {
+    public void scrollFaq() {
         WebElement element = driver.findElement(accordion);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-        return this;
     }
 
     //Метод открытия первого элемент списка
-    public MainPage clickToAnswer(int itemId) {
+    public void clickToAnswer(int itemId) {
         driver.findElement(By.id(question + itemId)).click();
-        return this;
     }
 
-    //
+    //Метод получения ответа из accordion на главной странице
     public String getAnswer(int itemId) {
         return (driver.findElement(By.id(answer + itemId)).getText());
     }
 
-    //
+    //Метод получения вопроса из accordion на главной странице
     public String getQuestion(int itemId) {
         return (driver.findElement(By.id(question + itemId)).getText());
     }
@@ -92,9 +86,8 @@ public class MainPage {
     }
 
     //Метод открытия главной страницы-URL
-    public MainPage openMainPage() {
+    public void openMainPage() {
         driver.get(EnvConfig.BASE_URL);
-        return this;
     }
 
     //Метод клика заказать в хедере
@@ -107,24 +100,24 @@ public class MainPage {
         driver.findElement(mainOrderButton).click();
     }
 
-    public MainPage equalsAnswer(int itemId, String expectedAnswers){
+    //Метод сравнения ответа с ОР
+    public void equalsAnswer(int itemId, String expectedAnswers){
         String actualAnswer = getAnswer(itemId);
         assertEquals("Ответы не совпадают", actualAnswer, expectedAnswers);
-        return this;
     }
 
-    public MainPage equalsQuestion(int itemId, String expectedQuestion){
+    //Метод сравнения вопроса с ОР
+    public void equalsQuestion(int itemId, String expectedQuestion){
         String actualQuestion = getQuestion(itemId);
         assertEquals("Вопросы не совпадают", actualQuestion, expectedQuestion);
-        return this;
     }
 
-    public MainPage waitAcardion(int itemId) {
+    //Метод ожидания появления блока с ответом
+    public void waitAcardion(int itemId) {
 
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id(answer + itemId)));
 
         assertTrue(driver.findElement(By.id(answer + itemId)).isDisplayed());
-        return this;
     }
 }

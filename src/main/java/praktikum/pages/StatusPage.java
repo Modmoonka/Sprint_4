@@ -14,13 +14,14 @@ import static praktikum.EnvConfig.EXPLICIT_WAIT;
 
 public class StatusPage {
     private final WebDriver driver;
-
+    //Картинка отсутствия заказа
     private final By notFoundImage = By.cssSelector("img[alt='Not found']");
 
     public StatusPage(WebDriver driver) {
         this.driver = driver;
     }
 
+    //Ожидание появления картинки отсутствия заказа
     public void checkNotFoundMessage() {
 
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))

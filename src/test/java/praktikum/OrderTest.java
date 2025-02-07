@@ -42,42 +42,40 @@ public class OrderTest {
 
     @BeforeClass
     public static void closeCookies() {
-        MainPage mp = new MainPage(DriverFactory.getDriver());
-        mp.openMainPage();
-        mp.clickCookie();
+        MainPage mainPage = new MainPage(DriverFactory.getDriver());
+        mainPage.openMainPage();
+        mainPage.clickCookie();
     }
 
-        @Parameterized.Parameters
-        public static Object[][] orderDataTest() {
-            return new Object[][] {
-                    {"Иван","Иванов","ул.Молодежная д.8", "Сокольники","+79234567890","03.02.2025","двое суток","black","Привезти до обеда"},
-                    {"Ирина","Меркулова","ул.Смирнова д.10", "Лубянка","+79999999999","01.02.2025","сутки","grey","Х"},
-            };
-        }
+    @Parameterized.Parameters
+    public static Object[][] orderDataTest() {
+        return new Object[][] {
+            {"Иван","Иванов","ул.Молодежная д.8", "Сокольники","+79234567890","03.02.2025","двое суток","black","Привезти до обеда"},
+            {"Ирина","Меркулова","ул.Смирнова д.10", "Лубянка","+79999999999","01.02.2025","сутки","grey","Х"},
+        };
+    }
 
-        // Ввод значений для теста
-        @Test
-        public void clickOrderPage() {
-            WebDriver driver = factory.getDriver();
-            MainPage mainPage = new MainPage(driver);
-            mainPage.clickHeaderOrderButton();
-            OrderPage orderPage = new OrderPage(driver);
-            RentalPage rentaldPage = new RentalPage(driver);
-            orderPage.enterOrderData(name, surname, address, metro, phone);
-            rentaldPage.enterRental(orderDate, rentalPeriod, color, comment);
-        }
+    // Ввод значений для теста
+    @Test
+    public void clickOrderPage() {
+        WebDriver driver = DriverFactory.getDriver();
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickHeaderOrderButton();
+        OrderPage orderPage = new OrderPage(driver);
+        RentalPage rentalPage = new RentalPage(driver);
+        orderPage.enterOrderData(name, surname, address, metro, phone);
+        rentalPage.enterRental(orderDate, rentalPeriod, color, comment);
+    }
 
-        @Test
-        public void createOrderInMainPage(){
+    @Test
+    public void createOrderInMainPage(){
+        MainPage mainPage = new MainPage(DriverFactory.getDriver());
+        mainPage.clickMainOrderButton();
+        OrderPage orderPage = new OrderPage(driver);
+        RentalPage rentalPage = new RentalPage(driver);
 
-            MainPage mp = new MainPage(DriverFactory.getDriver());
-            mp.clickMainOrderButton();
-            OrderPage orderPage = new OrderPage(driver);
-            RentalPage rentalPage = new RentalPage(driver);
-
-            mp.clickMainOrderButton();
-            orderPage.enterOrderData(name, surname, address, metro, phone);
-            rentalPage.enterRental(orderDate, rentalPeriod, color, comment);
-        }
-
+        mainPage.clickMainOrderButton();
+        orderPage.enterOrderData(name, surname, address, metro, phone);
+        rentalPage.enterRental(orderDate, rentalPeriod, color, comment);
+    }
 }

@@ -19,7 +19,6 @@ public static WebDriver driver;
         initDriver();
     }
 
-
     @Override
     protected void after() {
         driver.close();
